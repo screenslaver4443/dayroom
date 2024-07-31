@@ -997,3 +997,5 @@ node_modules/playwright-core/lib/vite/traceViewer/assets/xtermModule-BeNbaIVa.js
 node_modules/playwright-core/types/protocol.d.ts
 node_modules/playwright-core/types/structs.d.ts
 node_modules/playwright-core/types/types.d.ts
+test-results/.last-run.json
+.env
