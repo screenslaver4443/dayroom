@@ -9,6 +9,7 @@
     methods: {
       async fetchData(){
         try{
+          this.output = 'loading'
           const response = await axios.get('http://localhost:3000/fetch-daymap');
           console.log(response.data);
           this.output = response.data;
