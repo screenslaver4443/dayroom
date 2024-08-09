@@ -11,8 +11,14 @@ app.use(cors({
 }))
 app.use(express.json())
 
-app.get('/fetch-daymap', async (req, res)  => {
-    const assignments = await dm(process.env["DM_username"], process.env["DM_password"])
+app.post('/fetch-daymap', async (req, res)  => {
+    const {username, password} = req.body;
+    console.log(username)
+    console.log(password)
+    if (!username || !password) {
+        return res.status(400).json({message: "Missing username or password"})
+    }
+    const assignments = await dm(username, password)
     res.json (assignments)
 });
 

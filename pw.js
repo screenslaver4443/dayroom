@@ -64,6 +64,5 @@ async function daymapScrape(dmapusername, dmappassword) {
     console.log(dtaskstble);
     return dtaskstble;
 }
-// console.log(await daymapScrape(process.env["DM_username"], process.env["DM_password"]));
 
 export default daymapScrape
