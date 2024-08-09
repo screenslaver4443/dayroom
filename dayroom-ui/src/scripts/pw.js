@@ -1,6 +1,7 @@
-import playwright from 'playwright'
-import cheerio from 'cheerio'
-import dotenv from 'dotenv'
+const playwright = require('playwright');
+const cheerio = require('cheerio')
+const dotenv = require('dotenv')
+
 dotenv.config()
 
 async function daymapScrape(dmapusername, dmappassword) {
@@ -41,7 +42,7 @@ async function daymapScrape(dmapusername, dmappassword) {
             });
             dtaskstble.push(items);
         });
-        // for loop to convert the array into objects
+        // for loop to convert the array into objects 
         for (let i = 0; i < dtaskstble.length; i++) {
             let obj = {};
             obj['subject'] = dtaskstble[i][2];
@@ -54,15 +55,17 @@ async function daymapScrape(dmapusername, dmappassword) {
         return dtaskstble;
     }
     const browser = await playwright.chromium.launch({headless: true});
-    console.log('ran')
+
     const page = await browser.newPage();
     await page.goto('https://gihs.daymap.net/daymap/student/assignments.aspx');
     // await page.waitForEvent('load');
     await login(dmapusername, dmappassword);
     var dtaskstble = await extractTaskData();
     await browser.close();
-    console.log(dtaskstble);
     return dtaskstble;
 }
 
-export default daymapScrape
+//Test
+(async () => {
+    console.log(await daymapScrape(process.env["DM_username"], process.env["DM_password"]))
+})()
