@@ -4,6 +4,8 @@ const port = 3000;
 import dm from './pw.js'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import {generateAuthUrl, fetchClassroom, fetchToken} from './clssrm.js';
+
 dotenv.config()
 
 app.use(cors({
@@ -11,15 +13,39 @@ app.use(cors({
 }))
 app.use(express.json())
 
+var code = null;
+var token = null;
+
 app.post('/fetch-daymap', async (req, res)  => {
     const {username, password} = req.body;
-    console.log(username)
-    console.log(password)
     if (!username || !password) {
         return res.status(400).json({message: "Missing username or password"})
     }
-    const assignments = await dm(username, password)
-    res.json (assignments)
+    try {const assignments = await dm(username, password)
+        res.json (assignments)
+    }
+    catch{return res.status(400).json({message: "Error Fetching"})}
+    
+});
+
+app.get('/generate-auth-url', async (req, res) => {
+    let url = await generateAuthUrl();
+    res.json({message: 'success', url: url});
+});
+
+app.get('/oauth2callback', async (req, res) => {
+    code = req.query.code;
+    token = await fetchToken(code);
+    res.end('you may now close this window');
+});
+
+app.get('/fetch-classroom', async (req, res) => {
+    const key = token;
+    if (!key) {
+        return res.status(400).json({message: 'No key found'});
+    }
+    const courses = await fetchClassroom(key);
+    res.json(courses);
 });
 
 app.listen(port, () => {
