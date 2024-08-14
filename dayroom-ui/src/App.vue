@@ -2,11 +2,14 @@
   <h1>Dayroom</h1>
   <h2>Daymap Assignments</h2>
   <DaymapAssignments />
+  <h2>Classroom Assignments</h2>
+  <ClassroomAssignments />
 
 </template>
 
 <script setup>
 import DaymapAssignments from "@/components/DaymapAssignments.vue";
+import ClassroomAssignments from "@/components/ClassroomAssignments.vue";
 </script>
 
 <style>
