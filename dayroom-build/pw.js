@@ -53,10 +53,10 @@ async function daymapScrape(dmapusername, dmappassword) {
         }
         return dtaskstble;
     }
-    const browser = await playwright.chromium.launch({headless: false});
+    const browser = await playwright.chromium.launch({headless: true});
     const page = await browser.newPage();
     await page.goto('https://gihs.daymap.net/daymap/student/assignments.aspx');
-    await page.waitForEvent('load');
+    await page.waitForLoadState('domcontentloaded')
     await login(dmapusername, dmappassword);
     var dtaskstble = await extractTaskData();
     await browser.close();

@@ -1,0 +1,25 @@
+{
+  "name": "dayroom-build",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "app to show daymap and google classroom assignments",
+  "main": "main.cjs",
+  "scripts": {
+    "server": "node server.js",
+    "start" : "electron ."
+  },
+  "author": "Nikolai",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "electron": "^31.3.1",
+    "express": "^4.19.2",
+    "googleapis": "^140.0.1",
+    "playwright": "^1.45.3"
+  },
+  "devDependencies": {
+    "electron": "^31.3.1"
+  }
+}
